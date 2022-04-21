@@ -1,10 +1,10 @@
-INSERT INTO department (name)
+INSERT INTO departments (name)
 VALUES ("Math"),
        ("Science"),
        ("History"),
        ("PhysEd");
 
-INSERT INTO role (title, salary)
+INSERT INTO roles (title, salary)
 VALUES ("Teacher", "45000"),
        ("Admin", "55000"),
        ("Intern", "35000"), 

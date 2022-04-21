@@ -2,19 +2,19 @@ DROP DATABASE IF EXISTS company_db;
 CREATE DATABASE company_db;
 USE company_db;
 
-CREATE TABLE department (
+CREATE TABLE departments (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(30) NOT NULL,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE role (
+CREATE TABLE roles (
     id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(30) NOT NULL,
     salary DECIMAL,
     department_id INT,
     PRIMARY KEY (id),
-    FOREIGN KEY (department_id) REFERENCES department(id)
+    FOREIGN KEY (department_id) REFERENCES departments(id)
 );
 
 CREATE TABLE employees (
@@ -23,6 +23,6 @@ CREATE TABLE employees (
     last_name VARCHAR(30) NOT NULL,
     manager_id INT,
     role_id INT,
-    FOREIGN KEY (role_id) REFERENCES role(id)
+    FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
