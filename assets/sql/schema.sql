@@ -3,9 +3,8 @@ CREATE DATABASE company_db;
 USE company_db;
 
 CREATE TABLE departments (
-    id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(30) NOT NULL,
-    PRIMARY KEY (id)
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(30) NOT NULL  
 );
 
 CREATE TABLE roles (

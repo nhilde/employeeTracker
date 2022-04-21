@@ -58,118 +58,115 @@ const askUser = () => {
         }
         )
 
-}
+};
 
 const showDepts = () => {
     db.query('SELECT * FROM departments', function (err, response) {
         console.table(response)
-        if(err) console.log(err)
+        if (err) console.log(err)
         askUser();
     })
-}
+};
 
 const showRoles = () => {
     db.query('SELECT * FROM roles', function (err, response) {
         console.table(response)
-        if(err) console.log(err)
+        if (err) console.log(err)
         askUser();
     })
-}
+};
 
 const showEmployees = () => {
     db.query('SELECT * FROM employees', function (err, response) {
         console.table(response)
-        if(err) console.log(err)
+        if (err) console.log(err)
         askUser();
     })
-}
+};
 
 const addDept = () => {
     inquirer.prompt([
-{
-    type: 'input',
-    message: 'What is the new department name?',
-    name: 'newDeptName'
+        {
+            type: 'input',
+            message: 'What is the new department name?',
+            name: 'newDeptName'
 
-}
+        }
     ])
-    .then((response) => {
-        db.query(`INSERT INTO departments (name) VALUES ("${response.newDeptName}")`)
-        showDepts()
-        askUser();
-    })
-}
+        .then((response) => {
+            db.query(`INSERT INTO departments (name) VALUES ("${response.newDeptName}")`, (err, rows) => {
+                showDepts()
+            })
+            
+        })
+};
 
 const addRole = () => {
     inquirer.prompt([
-{
-    type: 'input',
-    message: 'What is the title of the new role?',
-    name: 'newRoleTitle'
-},{
-    type: 'input',
-    message: 'What is the salary of the new role?',
-    name: 'newRoleSalary'
-},{
-    type: 'input',
-    message: 'What is the department ID of the new role?',
-    name: 'newRoleDeptId'
-}       
+        {
+            type: 'input',
+            message: 'What is the title of the new role?',
+            name: 'newRoleTitle'
+        }, {
+            type: 'input',
+            message: 'What is the salary of the new role?',
+            name: 'newRoleSalary'
+        }, {
+            type: 'input',
+            message: 'What is the department ID of the new role?',
+            name: 'newRoleDeptId'
+        }
     ])
-    .then((response) => {
-        db.query(`INSERT INTO roles (title, salary, department_id) VALUES ("${response.newRoleTitle}", "${response.newRoleSalary}", "${response.newRoleDeptId}")`)
-        showRoles()
-        askUser();
-    })
-}
+        .then((response) => {
+            db.query(`INSERT INTO roles (title, salary, department_id) VALUES ("${response.newRoleTitle}", "${response.newRoleSalary}", "${response.newRoleDeptId}")`)
+            showRoles()
+        })
+};
 
 const addEmployee = () => {
     inquirer.prompt([
-{
-    type: 'input',
-    message: 'What is the employees first name?',
-    name: 'newFirstName'
-},{
-    type: 'input',
-    message: 'What is the employees last name?',
-    name: 'newLastName'
-},{
-    type: 'input',
-    message: 'What is the employees manager ID?',
-    name: 'newManagerId'
-},{
-    type: 'input',
-    message: 'What is the employees Role ID?',
-    name: 'newEmpRoleId'
-}
+        {
+            type: 'input',
+            message: 'What is the employees first name?',
+            name: 'newFirstName'
+        }, {
+            type: 'input',
+            message: 'What is the employees last name?',
+            name: 'newLastName'
+        }, {
+            type: 'input',
+            message: 'What is the employees manager ID?',
+            name: 'newManagerId'
+        }, {
+            type: 'input',
+            message: 'What is the employees Role ID?',
+            name: 'newEmpRoleId'
+        }
     ])
-    .then((response) => {
-        db.query(`INSERT INTO employees (first_name, last_name, manager_id, role_id) VALUES ("${response.newFirstName}", "${response.newLastName}", "${response.newManagerId}", "${response.newEmpRoleId}")`)
-        showEmployees()
-        askUser();
-    })
-}
+        .then((response) => {
+            db.query(`INSERT INTO employees (first_name, last_name, manager_id, role_id) VALUES ("${response.newFirstName}", "${response.newLastName}", "${response.newManagerId}", "${response.newEmpRoleId}")`)
+            showEmployees()
+        })
+};
 
 const updateRole = () => {
     inquirer.prompt([
-{
-    type: 'input',
-    message: 'Enter the employees ID',
-    name: 'updateId'
-},{
-    type: 'input',
-    message: 'What is the employees new role ID?',
-    name: 'updatedRoleId'
-}
+        {
+            type: 'input',
+            message: 'Enter the employees ID',
+            name: 'updateId'
+        }, {
+            type: 'input',
+            message: 'What is the employees new role ID?',
+            name: 'updatedRoleId'
+        }
 
     ])
-    .then((response) => {
-        db.query(`UPDATE employees SET role_id = "${response.updatedRoleId}" WHERE id = "${response.updateId}"`)
-        showEmployees()
-        
-        askUser();
-    })
-}
+        .then((response) => {
+            db.query(`UPDATE employees SET role_id = "${response.updatedRoleId}" WHERE id = "${response.updateId}"`)
+            showEmployees()
+        })
+};
 
 
 
